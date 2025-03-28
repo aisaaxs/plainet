@@ -1,5 +1,5 @@
 {
-  "name": "plainet",
+  "name": "banksy",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,10 +10,10 @@
     "docker:up": "docker-compose up",
     "docker:build": "npm run docker:down && COMPOSE_DOCKER_CLI_BUILD=1 COMPOSE_BAKE=true DOCKER_BUILDKIT=1 docker-compose build && npm run docker:up",
     "docker:down": "docker-compose down --rmi all --volumes --remove-orphans",
-    "docker:down-containers": "docker ps -aq --filter 'name=plainet' | xargs docker rm -f",
-    "docker:down-images": "docker images -q --filter 'reference=plainet' | xargs docker rmi -f",
-    "docker:down-volumes": "docker volume ls -q --filter 'name=plainet' | xargs docker volume rm",
-    "docker:down-networks": "docker network ls -q --filter 'name=plainet' | xargs docker network rm",
+    "docker:down-containers": "docker ps -aq --filter 'name=banksy' | xargs docker rm -f",
+    "docker:down-images": "docker images -q --filter 'reference=banksy' | xargs docker rmi -f",
+    "docker:down-volumes": "docker volume ls -q --filter 'name=banksy' | xargs docker volume rm",
+    "docker:down-networks": "docker network ls -q --filter 'name=banksy' | xargs docker network rm",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",

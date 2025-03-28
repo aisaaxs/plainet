@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { classifyQueryWithRetry } from "../../../../utils/classifyQuery";
-import { handleGreetingQuery } from "../../../../utils/handleGreetingQuery";
-import { handleGeneralFinanceQuery } from "../../../../utils/handleGeneralFinanceQuery";
-import { handleUserSpecificAccountsQuery } from "../../../../utils/handleUserSpecificAccountsQuery";
-import { handleUserSpecificTransactionsQuery } from "../../../../utils/handleUserSpecificTransactionsQuery";
+import { classifyQueryWithRetry } from "../../../utils/classifyQuery";
+import { handleGreetingQuery } from "../../../utils/handleGreetingQuery";
+import { handleGeneralFinanceQuery } from "../../../utils/handleGeneralFinanceQuery";
+import { handleUserSpecificAccountsQuery } from "../../../utils/handleUserSpecificAccountsQuery";
+import { handleUserSpecificTransactionsQuery } from "../../../utils/handleUserSpecificTransactionsQuery";
+import { handleUserSpecificAccountsAndTransactionsQuery } from "../../../utils/handleUserSpecificAccountsAndTransactionsQuery";
+import { handleHybridQuery } from "../../../utils/handleHybridQuery";
 
 export async function POST(request: NextRequest) {
   try {
@@ -49,14 +51,23 @@ export async function POST(request: NextRequest) {
             { status: 200 }
         );
     } else if (category === "USER-SPECIFIC ACCOUNTS AND TRANSACTIONS") {
-
+        const userSpecificAccountsAndTransactionsResponse = await handleUserSpecificAccountsAndTransactionsQuery(query);
+        return NextResponse.json(
+            { category, response: userSpecificAccountsAndTransactionsResponse },
+            { status: 200 }
+        );
     } else if (category === "HYBRID") {
-
-    } else {
-        
+        const hybridResponse = await handleHybridQuery(query);
+        return NextResponse.json(
+            { category, response: hybridResponse },
+            { status: 200 }
+        );
     }
 
-    return NextResponse.json({ category, response: category }, { status: 200 });
+    return NextResponse.json(
+        { category, response: "Apologies, but as your financial assistant, I'm only able to help within my set capabilities." },
+        { status: 200 }
+      );      
   } catch (error) {
     console.error("Error in classification API:", error);
     return NextResponse.json(

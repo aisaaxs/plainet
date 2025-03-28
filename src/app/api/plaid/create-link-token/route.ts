@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const { client_user_id } = await req.json();
     const response = await client.linkTokenCreate({
       user: { client_user_id },
-      client_name: 'PlaiNet',
+      client_name: 'Banksy',
       products: [
         Products.Auth,
         Products.Transactions,

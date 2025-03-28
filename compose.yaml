@@ -1,7 +1,7 @@
 services:
   app:
-    image: plainet
-    container_name: plainet_app
+    image: banksy
+    container_name: banksy_app
     restart: always
     build:
       context: ./
@@ -14,7 +14,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/plainet_db?schema=public
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/banksy_db?schema=public
       - COMPOSE_BAKE=true
     depends_on:
       db:
@@ -27,16 +27,16 @@ services:
 
   db:
     image: postgres:16
-    container_name: plainet_database
+    container_name: banksy_database
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: plainet_db
+      POSTGRES_DB: banksy_db
     ports:
       - '5432:5432'
     volumes:
-      - plainet_postgres_data:/var/lib/postgresql/data
+      - banksy_postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -44,6 +44,6 @@ services:
       retries: 5
 
 volumes:
-  plainet_postgres_data:
-  plainet_node_modules:
-  plainet_next:
+  banksy_postgres_data:
+  banksy_node_modules:
+  banksy_next:

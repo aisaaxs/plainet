@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/navbar";
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import PlaidLinkComponent from "../components/plaidLink";
@@ -8,9 +7,9 @@ import PlaidLinkComponent from "../components/plaidLink";
 config.autoAddCss = false;
 
 export const metadata: Metadata = {
-  title: "PlaiNet",
+  title: "Banksy",
   description:
-    "An AI-Powered Personal Finance Tool, authored by Anitej Isaac Sharma",
+    "An AI-Powered Personal Finance ChatBot, authored by Anitej Isaac Sharma",
 };
 
 async function getAccounts() {
@@ -39,8 +38,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="antialiased w-screen h-screen grid grid-rows-[60px_auto]">
-        <Navbar />
+      <body className="antialiased w-screen h-screen">
         {hasAccounts ? children : <PlaidLinkComponent />}
       </body>
     </html>
