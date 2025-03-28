@@ -1,0 +1,51 @@
+{
+  "name": "plainet",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "docker:up": "docker-compose up",
+    "docker:build": "npm run docker:down && COMPOSE_DOCKER_CLI_BUILD=1 COMPOSE_BAKE=true DOCKER_BUILDKIT=1 docker-compose build && npm run docker:up",
+    "docker:down": "docker-compose down --rmi all --volumes --remove-orphans",
+    "docker:down-containers": "docker ps -aq --filter 'name=plainet' | xargs docker rm -f",
+    "docker:down-images": "docker images -q --filter 'reference=plainet' | xargs docker rmi -f",
+    "docker:down-volumes": "docker volume ls -q --filter 'name=plainet' | xargs docker volume rm",
+    "docker:down-networks": "docker network ls -q --filter 'name=plainet' | xargs docker network rm",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "prisma:push": "npm run prisma:generate && prisma db push"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@pinecone-database/pinecone": "^5.1.1",
+    "@prisma/client": "^6.6.0-dev.65",
+    "axios": "^1.8.4",
+    "next": "15.2.3",
+    "openai": "^4.89.0",
+    "plaid": "^31.1.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-plaid-link": "^3.6.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^9",
+    "eslint-config-next": "15.2.3",
+    "prisma": "^6.6.0-dev.65",
+    "tailwindcss": "^4",
+    "tsx": "^4.19.3",
+    "typescript": "^5"
+  }
+}
